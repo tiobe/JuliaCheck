@@ -17,9 +17,11 @@ err_code=0
 for test_file in tests/*.jl; do
     val_file=${test_file%.jl}.val
     [ -r "$val_file" ] || continue
-    if diff $val_file <( julia $JuliaCheck $test_file ); then
+    if diff -q $val_file <( julia $JuliaCheck $test_file ) > /dev/null 2>&1
+    then
         echo "File '$test_file' checked."
     else
+        echo " -- Test failed for file '$test_file'."
         ((err_code++))
     fi
 done

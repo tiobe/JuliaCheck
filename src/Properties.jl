@@ -74,6 +74,13 @@ function is_infix_operator(node::SyntaxNode)
 end
 
 
+function inside(node::SyntaxNode, predicate::Function)::Bool
+    return !isnothing(node.parent) && (     # if we reach the top, return false
+        predicate(node.parent) ||           # test the node's parent
+        inside(node.parent, predicate)      # if false, keep going up
+    )
+end
+
 function opens_scope(node::SyntaxNode)
     return is_function(node) ||
            kind(node) ∈ [KSet"for while try do let macro generator"]
