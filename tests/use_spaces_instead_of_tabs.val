@@ -5,23 +5,23 @@ tests/use_spaces_instead_of_tabs.jl(2, 1):
 	vec = rand(Int64, 5)
 └──┘ ── There are tab characters here.
 Use spaces instead of tabs for indentation.
-Rule: asml-xxxx-use-spaces-instead-of-tabs. Severity: 7
+Rule: use-spaces-instead-of-tabs. Severity: 7
 
 tests/use_spaces_instead_of_tabs.jl(6, 1):
 	# Of each element, take the absolute value, modulo 5, and sort
 └──┘ ── There are tab characters here.
 Use spaces instead of tabs for indentation.
-Rule: asml-xxxx-use-spaces-instead-of-tabs. Severity: 7
+Rule: use-spaces-instead-of-tabs. Severity: 7
 
 tests/use_spaces_instead_of_tabs.jl(9, 5):
     	println("Bad vector.	String are off-limits.")
 #   └──┘ ── There are tab characters here.
 Use spaces instead of tabs for indentation.
-Rule: asml-xxxx-use-spaces-instead-of-tabs. Severity: 7
+Rule: use-spaces-instead-of-tabs. Severity: 7
 
 tests/use_spaces_instead_of_tabs.jl(11, 1):
 	
 └──┘ ── There are tab characters here.
 Use spaces instead of tabs for indentation.
-Rule: asml-xxxx-use-spaces-instead-of-tabs. Severity: 7
+Rule: use-spaces-instead-of-tabs. Severity: 7
 

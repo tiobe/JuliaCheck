@@ -20,7 +20,7 @@ function check(node::GreenNode)
     if rem(indentation, 4) > 0
         report_violation(index=source_index()+1, len=indentation,
                          line=lines_count()+1, col=1,
-                         severity=7, rule_id="asml-indentation-levels-are-four-spaces",
+                         severity=7, rule_id="indentation-levels-are-four-spaces",
                          user_msg="Indentation here is $indentation, which is not multiple of 4.",
                          summary="Indentation will be done in multiples of four spaces.")
     end

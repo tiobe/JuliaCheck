@@ -5,17 +5,17 @@ tests/leading_and_trailing_digits.jl(1, 29):
 an_expression(x) = 1.5x^2 - .5x + 1
 #                           └┘ ── Bad format for literal '.5'.
 Floating-point numbers should always have one digit before the decimal point and at least one after.
-Rule: asml-xxxx-leading-and-trailing-digits. Severity: 3
+Rule: leading-and-trailing-digits. Severity: 3
 
 tests/leading_and_trailing_digits.jl(2, 21):
 float_vec = Float64[.0, 1. ]
 #                   └┘ ── Bad format for literal '.0'.
 Floating-point numbers should always have one digit before the decimal point and at least one after.
-Rule: asml-xxxx-leading-and-trailing-digits. Severity: 3
+Rule: leading-and-trailing-digits. Severity: 3
 
 tests/leading_and_trailing_digits.jl(2, 25):
 float_vec = Float64[.0, 1. ]
 #                       └┘ ── Bad format for literal '1.'.
 Floating-point numbers should always have one digit before the decimal point and at least one after.
-Rule: asml-xxxx-leading-and-trailing-digits. Severity: 3
+Rule: leading-and-trailing-digits. Severity: 3
 

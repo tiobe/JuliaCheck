@@ -12,7 +12,7 @@ function check(modjule::SyntaxNode)
         mod_name = string(mod_id)
         file_name = basename(filename(modjule))[1:end-3]
         if mod_name !== file_name
-            report_violation(mod_id; severity=5, rule_id="asml-single-module-file",
+            report_violation(mod_id; severity=5, rule_id="single-module-file",
                         user_msg="Module name, $mod_id, should match its file name, $file_name.",
                         summary="A file in which a module is implemented should have the name of the module it contains.")
         end
@@ -30,13 +30,13 @@ function check(modjule::SyntaxNode)
                 mod_id = children(node)[1]
                 mod_name = string(mod_id)
                 report_violation(mod_id; severity=5,
-                        rule_id="asml-single-module-file",
+                        rule_id="single-module-file",
                         user_msg="Module '$mod_name' should be inside '$name_1st_mod' or in its own file.",
                         summary="Implement a maximum of one module per Julia file.")
             end
             for node in kids[kids .∉ Ref(modules)]
                 report_violation(node; severity=5,
-                        rule_id="asml-single-module-file",
+                        rule_id="single-module-file",
                         user_msg="Move this code into module '$name_1st_mod'.",
                         summary="All code must be inside a module.")
             end

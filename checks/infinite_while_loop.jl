@@ -9,7 +9,7 @@ function check(wyle::SyntaxNode)
     condition = children(wyle)[1]
     if kind(condition) == K"Bool" && string(condition) == "true"
         report_violation(condition; severity=5,
-                rule_id="asml-xxxx-infinite-while-loop",
+                rule_id="infinite-while-loop",
                 user_msg= "Implement a proper stop criterion for this while loop.",
                 summary="Do not use while true.")
     end

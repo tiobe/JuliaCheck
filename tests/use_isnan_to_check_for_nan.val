@@ -5,29 +5,29 @@ tests/use_isnan_to_check_for_nan.jl(1, 47):
 my_is_nan(value) = value != value || value == NaN || value === NaN
 #                                             └─┘ ── Detected comparison with NaN.
 Use isnan to check for not-a-number values.
-Rule: asml-use-isnan-to-check-for-nan. Severity: 3
+Rule: use-isnan-to-check-for-nan. Severity: 3
 
 tests/use_isnan_to_check_for_nan.jl(1, 64):
 my_is_nan(value) = value != value || value == NaN || value === NaN
 #                                                              └─┘ ── Detected comparison with NaN.
 Use isnan to check for not-a-number values.
-Rule: asml-use-isnan-to-check-for-nan. Severity: 3
+Rule: use-isnan-to-check-for-nan. Severity: 3
 
 tests/use_isnan_to_check_for_nan.jl(4, 21):
     return value != Base.NaN16 || value != -Base.NaN32 || value != Base.NaN64
 #                   └────────┘ ── Detected comparison with NaN16.
 Use isnan to check for not-a-number values.
-Rule: asml-use-isnan-to-check-for-nan. Severity: 3
+Rule: use-isnan-to-check-for-nan. Severity: 3
 
 tests/use_isnan_to_check_for_nan.jl(4, 43):
     return value != Base.NaN16 || value != -Base.NaN32 || value != Base.NaN64
 #                                         └──────────┘ ── Detected comparison with -NaN32.
 Use isnan to check for not-a-number values.
-Rule: asml-use-isnan-to-check-for-nan. Severity: 3
+Rule: use-isnan-to-check-for-nan. Severity: 3
 
 tests/use_isnan_to_check_for_nan.jl(4, 68):
     return value != Base.NaN16 || value != -Base.NaN32 || value != Base.NaN64
 #                                                                  └────────┘ ── Detected comparison with NaN64.
 Use isnan to check for not-a-number values.
-Rule: asml-use-isnan-to-check-for-nan. Severity: 3
+Rule: use-isnan-to-check-for-nan. Severity: 3
 

@@ -32,10 +32,10 @@ function check(modjule::SyntaxNode)::Nothing
     end
     # Either no comment found, or not in the same line as the [end] (that is
     # not considered OK), or the comment didn't match the expected content.
-    report_violation(mod_name_node; severity=9, rule_id="asml-module-end-comment",
+    report_violation(mod_name_node; severity=9, rule_id="module-end-comment",
         user_msg="The 'end' statement of this module should have a comment with the module's name.",
         summary="The end of a module quotes the module name in a comment.")
-    return nothing
+    # TODO report on the 'end' keyword, not on the 'module'.
 end
 
 function matches_module_name(mod_name::AbstractString, comment::AbstractString)

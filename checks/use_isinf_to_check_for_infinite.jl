@@ -14,7 +14,7 @@ function check(node::SyntaxNode)::Nothing
     inf_type = extract_inf_type(node)
     if inf_type !== nothing
         report_violation(node;
-            severity=3, rule_id="asml-use-isinf-to-check-for-infinite",
+            severity=3, rule_id="use-isinf-to-check-for-infinite",
             user_msg = "Detected comparison with $inf_type.",
             summary = "Use isinf to check for infinite values.")
     end

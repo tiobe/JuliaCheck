@@ -14,7 +14,7 @@ function check(node::SyntaxNode)
     end
     func = node.parent
     report() = report_violation(node; severity=3,
-        rule_id="asml-short-hand-function-too-complicated",
+        rule_id="short-hand-function-too-complicated",
         user_msg="Function '$(get_func_name(func))' is too complex for the shorthand notation; use keyword 'function'.",
         summary="Short-hand notation with concise functions.")
 

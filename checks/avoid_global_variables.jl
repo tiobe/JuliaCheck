@@ -1,4 +1,4 @@
-module AvoidGlobals
+module AvoidGlobalVariables
 
 using JuliaSyntax: @K_str, @KSet_str, kind, SyntaxNode
 

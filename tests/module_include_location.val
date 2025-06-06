@@ -1,0 +1,15 @@
+
+>> Processing file 'tests/module_include_location.jl'...
+
+tests/module_include_location.jl(1, 8):
+module module_include_location
+#      └─────────────────────┘ ── Module name `module_include_location` should be written in UpperCamelCase.
+Package and module names should be written in UpperCamelCase.
+Rule: module-name-casing. Severity: 5
+
+tests/module_include_location.jl(7, 5):
+    using Statistics
+#   └──────────────┘ ── Group include's after all import/using lines.
+The list of included files appears after the list of imported packages.
+Rule: module-include-location. Severity: 9
+

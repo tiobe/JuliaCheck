@@ -1,4 +1,4 @@
-module LongFormFunctionsHaveReturnStatement
+module LongFormFunctionsHaveATerminatingReturnStatement
 
 import JuliaSyntax: SyntaxNode, @K_str, kind, children
 using ...Properties: inside, is_struct, get_func_name, haschildren, report_violation
@@ -18,7 +18,7 @@ function check(func_body::SyntaxNode)
     if !_ends_with_return(func_body)
         node = haschildren(func_body) ? children(func_body)[end] : func_body
         report_violation(node; severity=3,
-                rule_id="asml-long-form-functions-have-a-terminating-return-statement",
+                rule_id="long-form-functions-have-a-terminating-return-statement",
                 user_msg= "Function '$fname' should end with an explicit return statement (or one in each conditional branch).",
                 summary="Long form functions are ended by a return statement.")
     end

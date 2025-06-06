@@ -5,11 +5,11 @@ tests/too_many_types_in_unions.jl(4, 21):
 const ReturnTypes = Union{Nothing, String, Int32, Int64, Float64}
 #                   └───────────────────────────────────────────┘ ── Detected a union with too many types.
 Too many types: there should be no more than 4 types in a Union.
-Rule: asml-too-many-types-in-unions. Severity: 6
+Rule: too-many-types-in-unions. Severity: 6
 
 tests/too_many_types_in_unions.jl(10, 12):
 NonConst = Union{Nothing, Bool}     # fails other test, but OK here
 #          └──────────────────┘ ── Declare this Union as a const type before using it.
 Implement Unions as const.
-Rule: asml-implement-unions-as-consts. Severity: 3
+Rule: implement-unions-as-consts. Severity: 3
 

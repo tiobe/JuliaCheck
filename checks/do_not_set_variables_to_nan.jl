@@ -24,7 +24,7 @@ function check(node::SyntaxNode)::Nothing
         _, var_name = get_assignee(node)
         nan_type = extract_nan_type(rhs)
         report_violation(rhs;
-            severity=3, rule_id="asml-do-not-set-variables-to-nan",
+            severity=3, rule_id="do-not-set-variables-to-nan",
             user_msg = isnothing(var_name) ? "Assignment of $nan_type detected" :
                                     "Variable '$var_name' is assigned $nan_type",
             summary = "Do not set variables to NaN, NaN16, NaN32 or NaN64")

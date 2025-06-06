@@ -5,7 +5,7 @@ tests/short_hand_function_too_complicated.jl(1, 41):
 get_specific_numbers()::Vector{Int64} = sort([abs((rand(Int64)) % 5) for i::Int64 in range(1, 5)])
 #                                       └────────────────────────────────────────────────────────┘ ── Function 'get_specific_numbers' is too complex for the shorthand notation; use keyword 'function'.
 Short-hand notation with concise functions.
-Rule: asml-short-hand-function-too-complicated. Severity: 3
+Rule: short-hand-function-too-complicated. Severity: 3
 
 tests/short_hand_function_too_complicated.jl(14, 20):
 #                  ┌──────────────────
@@ -13,5 +13,5 @@ expr_depth(node) = haschildren(node) ?
     (1 + max(expr_depth.(children(node)))) : 0
 #────────────────────────────────────────────┘ ── Function 'expr_depth' is too complex for the shorthand notation; use keyword 'function'.
 Short-hand notation with concise functions.
-Rule: asml-short-hand-function-too-complicated. Severity: 3
+Rule: short-hand-function-too-complicated. Severity: 3
 

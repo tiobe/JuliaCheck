@@ -14,7 +14,7 @@ function check(node::SyntaxNode)::Nothing
     nothing_type = extract_nothing_type(node)
     if nothing_type !== nothing
         report_violation(node;
-            severity=3, rule_id="asml-use-isnothing-to-check-for-nothing-values",
+            severity=3, rule_id="use-isnothing-to-check-for-nothing-values",
             user_msg = "Detected comparison with $nothing_type.",
             summary = "Use isnothing to check for nothing values.")
     end

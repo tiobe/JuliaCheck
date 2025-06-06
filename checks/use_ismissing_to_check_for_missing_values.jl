@@ -14,7 +14,7 @@ function check(node::SyntaxNode)::Nothing
     missing_type = extract_missing_type(node)
     if missing_type !== nothing
         report_violation(node;
-            severity=3, rule_id="asml-use-ismissing-to-check-for-missing-values",
+            severity=3, rule_id="use-ismissing-to-check-for-missing-values",
             user_msg = "Detected comparison with $missing_type.",
             summary = "Use ismissing to check for missing values.")
     end

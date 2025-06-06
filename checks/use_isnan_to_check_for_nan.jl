@@ -14,7 +14,7 @@ function check(node::SyntaxNode)::Nothing
     inf_type = extract_nan_type(node)
     if inf_type !== nothing
         report_violation(node;
-            severity=3, rule_id="asml-use-isnan-to-check-for-nan",
+            severity=3, rule_id="use-isnan-to-check-for-nan",
             user_msg = "Detected comparison with $inf_type.",
             summary = "Use isnan to check for not-a-number values.")
     end

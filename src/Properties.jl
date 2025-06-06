@@ -11,7 +11,7 @@ export AnyTree, MAX_LINE_LENGTH, opens_scope, closes_module, closes_scope,
     expr_size, find_first_of_kind, get_assignee, get_func_arguments,
     get_func_body, get_func_name, get_imported_pkg, get_module_name,
     get_struct_members, get_struct_name, lines_count, report_violation,
-    reset_counters, SF, source_column, source_index, source_text
+    reset_counters, SF, source_column, source_index, source_text, to_pascal_case
 
 
 ## Types
@@ -33,7 +33,7 @@ const MAX_LINE_LENGTH = 92
 
 function report_violation(node::SyntaxNode;
                           severity::Int, user_msg::String,
-                          summary::String, rule_id::String)
+                          summary::String, rule_id::String)::Nothing
     line, column = JS.source_location(node)
     printstyled("\n$(JS.filename(node))($line, $(column)):\n";
                 underline=true)
@@ -43,7 +43,7 @@ function report_violation(node::SyntaxNode;
 end
 function report_violation(; index::Int, len::Int, line::Int, col::Int,
                             severity::Int, user_msg::String,
-                            summary::String, rule_id::String)
+                            summary::String, rule_id::String)::Nothing
     printstyled("\n$(JS.filename(SF))($line, $col):\n";
                 underline=true)
     JS.highlight(stdout, SF, index:index+len-1;
@@ -51,7 +51,7 @@ function report_violation(; index::Int, len::Int, line::Int, col::Int,
                  context_lines_after=0, context_lines_before=0)
     _report_common(severity, rule_id, summary)
 end
-function _report_common(severity::Int, rule_id::String, summary::String)
+function _report_common(severity::Int, rule_id::String, summary::String)::Nothing
     printstyled("\n$summary"; color=:cyan)
     printstyled("\nRule:"; underline=true)
     printstyled(" $rule_id. ")
@@ -314,5 +314,19 @@ source_index() = SOURCE_INDEX
 lines_count() = SOURCE_LINE
 source_column() = SOURCE_COL
 
+
+function to_pascal_case(s::String)::String
+    result::String = ""
+    got_dash::Bool = true
+    for c in s
+        if c == '-'
+            got_dash = true
+        else
+            result *= got_dash ? uppercase(c) : c
+            got_dash = false
+        end
+    end
+    return result
+end
 
 end

@@ -1,4 +1,4 @@
-module StructMembersCasing
+module StructMembersAreInLowerSnakeCase
 
 import JuliaSyntax: SyntaxNode, @K_str, kind, children
 using ...Properties: find_first_of_kind, is_lower_snake, report_violation

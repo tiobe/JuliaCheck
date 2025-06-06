@@ -5,13 +5,13 @@ tests/long_form_functions_have_a_terminating_return_statement.jl(3, 5):
     nothing
 #   └─────┘ ── Function 'void' should end with an explicit return statement (or one in each conditional branch).
 Long form functions are ended by a return statement.
-Rule: asml-long-form-functions-have-a-terminating-return-statement. Severity: 3
+Rule: long-form-functions-have-a-terminating-return-statement. Severity: 3
 
 tests/long_form_functions_have_a_terminating_return_statement.jl(7, 5):
     println("println returns nothing")
 #   └────────────────────────────────┘ ── Function 'bar' should end with an explicit return statement (or one in each conditional branch).
 Long form functions are ended by a return statement.
-Rule: asml-long-form-functions-have-a-terminating-return-statement. Severity: 3
+Rule: long-form-functions-have-a-terminating-return-statement. Severity: 3
 
 tests/long_form_functions_have_a_terminating_return_statement.jl(11, 5):
 #   ┌────────
@@ -22,5 +22,5 @@ tests/long_form_functions_have_a_terminating_return_statement.jl(11, 5):
     end
 #─────┘ ── Function 'with_if' should end with an explicit return statement (or one in each conditional branch).
 Long form functions are ended by a return statement.
-Rule: asml-long-form-functions-have-a-terminating-return-statement. Severity: 3
+Rule: long-form-functions-have-a-terminating-return-statement. Severity: 3
 

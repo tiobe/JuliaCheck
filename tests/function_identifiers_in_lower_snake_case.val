@@ -5,47 +5,47 @@ tests/function_identifiers_in_lower_snake_case.jl(1, 10):
 function BadFunName(x::T) where T<:Any return x end
 #        └────────┘ ── Function name `BadFunName` should be written in lower_snake_case.
 Function names are written in lower_snake_case.
-Rule: asml-function-identifiers-in-lower-snake-case. Severity: 8
+Rule: function-identifiers-in-lower-snake-case. Severity: 8
 
 tests/function_identifiers_in_lower_snake_case.jl(2, 10):
 function Get_Bacon()::Bacon return nothing end
 #        └───────┘ ── Function name `Get_Bacon` should be written in lower_snake_case.
 Function names are written in lower_snake_case.
-Rule: asml-function-identifiers-in-lower-snake-case. Severity: 8
+Rule: function-identifiers-in-lower-snake-case. Severity: 8
 
 tests/function_identifiers_in_lower_snake_case.jl(3, 10):
 function Get_bacon()::Bacon return nothing end
 #        └───────┘ ── Function name `Get_bacon` should be written in lower_snake_case.
 Function names are written in lower_snake_case.
-Rule: asml-function-identifiers-in-lower-snake-case. Severity: 8
+Rule: function-identifiers-in-lower-snake-case. Severity: 8
 
 tests/function_identifiers_in_lower_snake_case.jl(4, 10):
 function GetBacon()::Bacon return nothing end
 #        └──────┘ ── Function name `GetBacon` should be written in lower_snake_case.
 Function names are written in lower_snake_case.
-Rule: asml-function-identifiers-in-lower-snake-case. Severity: 8
+Rule: function-identifiers-in-lower-snake-case. Severity: 8
 
 tests/function_identifiers_in_lower_snake_case.jl(5, 10):
 function Getbacon()::Bacon return nothing end
 #        └──────┘ ── Function name `Getbacon` should be written in lower_snake_case.
 Function names are written in lower_snake_case.
-Rule: asml-function-identifiers-in-lower-snake-case. Severity: 8
+Rule: function-identifiers-in-lower-snake-case. Severity: 8
 
 tests/function_identifiers_in_lower_snake_case.jl(6, 10):
 function get_Bacon()::Bacon return nothing end
 #        └───────┘ ── Function name `get_Bacon` should be written in lower_snake_case.
 Function names are written in lower_snake_case.
-Rule: asml-function-identifiers-in-lower-snake-case. Severity: 8
+Rule: function-identifiers-in-lower-snake-case. Severity: 8
 
 tests/function_identifiers_in_lower_snake_case.jl(7, 10):
 function getBacon()::Bacon return nothing end
 #        └──────┘ ── Function name `getBacon` should be written in lower_snake_case.
 Function names are written in lower_snake_case.
-Rule: asml-function-identifiers-in-lower-snake-case. Severity: 8
+Rule: function-identifiers-in-lower-snake-case. Severity: 8
 
 tests/function_identifiers_in_lower_snake_case.jl(8, 10):
 function get_SPAM_from_somewhere()::SPAM return nothing end
 #        └─────────────────────┘ ── Function name `get_SPAM_from_somewhere` should be written in lower_snake_case.
 Function names are written in lower_snake_case.
-Rule: asml-function-identifiers-in-lower-snake-case. Severity: 8
+Rule: function-identifiers-in-lower-snake-case. Severity: 8
 

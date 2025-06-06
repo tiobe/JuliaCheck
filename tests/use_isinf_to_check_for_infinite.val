@@ -5,35 +5,35 @@ tests/use_isinf_to_check_for_infinite.jl(1, 29):
 my_is_inf(value) = value == Inf || value == -Inf
 #                           └─┘ ── Detected comparison with Inf.
 Use isinf to check for infinite values.
-Rule: asml-use-isinf-to-check-for-infinite. Severity: 3
+Rule: use-isinf-to-check-for-infinite. Severity: 3
 
 tests/use_isinf_to_check_for_infinite.jl(1, 44):
 my_is_inf(value) = value == Inf || value == -Inf
 #                                          └───┘ ── Detected comparison with -Inf.
 Use isinf to check for infinite values.
-Rule: asml-use-isinf-to-check-for-infinite. Severity: 3
+Rule: use-isinf-to-check-for-infinite. Severity: 3
 
 tests/use_isinf_to_check_for_infinite.jl(2, 32):
 missing_case(value) = (value == +Inf) != isinf(value)
 #                              └───┘ ── Detected comparison with Inf.
 Use isinf to check for infinite values.
-Rule: asml-use-isinf-to-check-for-infinite. Severity: 3
+Rule: use-isinf-to-check-for-infinite. Severity: 3
 
 tests/use_isinf_to_check_for_infinite.jl(5, 21):
     return value != Base.Inf16 || value != -Base.Inf32 || value != Base.Inf64
 #                   └────────┘ ── Detected comparison with Inf16.
 Use isinf to check for infinite values.
-Rule: asml-use-isinf-to-check-for-infinite. Severity: 3
+Rule: use-isinf-to-check-for-infinite. Severity: 3
 
 tests/use_isinf_to_check_for_infinite.jl(5, 43):
     return value != Base.Inf16 || value != -Base.Inf32 || value != Base.Inf64
 #                                         └──────────┘ ── Detected comparison with -Inf32.
 Use isinf to check for infinite values.
-Rule: asml-use-isinf-to-check-for-infinite. Severity: 3
+Rule: use-isinf-to-check-for-infinite. Severity: 3
 
 tests/use_isinf_to_check_for_infinite.jl(5, 68):
     return value != Base.Inf16 || value != -Base.Inf32 || value != Base.Inf64
 #                                                                  └────────┘ ── Detected comparison with Inf64.
 Use isinf to check for infinite values.
-Rule: asml-use-isinf-to-check-for-infinite. Severity: 3
+Rule: use-isinf-to-check-for-infinite. Severity: 3
 

@@ -16,7 +16,7 @@ function check(modjule::SyntaxNode)
             if is_import(node) && !is_include(node)
                 # We can skip include's because they are followed by an import
                 # or a using (we made sure in 'is_import').
-                report_violation(node; severity=9, rule_id="asml-module-import-location",
+                report_violation(node; severity=9, rule_id="module-import-location",
                         user_msg="Move imports to the top of the module, before any actual code.",
                         summary="Packages should be imported after the module keyword.")
             end

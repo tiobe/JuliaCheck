@@ -5,13 +5,13 @@ tests/single_module_file.jl(8, 8):
 module SecondModuleNotOK
 #      └───────────────┘ ── Module 'SecondModuleNotOK' should be inside 'single_module_file' or in its own file.
 Implement a maximum of one module per Julia file.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/single_module_file.jl(15, 8):
 module ThirdInFile
 #      └─────────┘ ── Module 'ThirdInFile' should be inside 'single_module_file' or in its own file.
 Implement a maximum of one module per Julia file.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/single_module_file.jl(11, 1):
 ┌────────────────────────────────
@@ -20,35 +20,35 @@ function out_of_module_is_wrong()
 end
 #─┘ ── Move this code into module 'single_module_file'.
 All code must be inside a module.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/single_module_file.jl(1, 8):
 module single_module_file
 #      └────────────────┘ ── Module name `single_module_file` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 
 tests/single_module_file.jl(3, 8):
 module SubModuleIsOK
 #      └───────────┘ ── Module name `SubModuleIsOK` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 
 tests/single_module_file.jl(8, 8):
 module SecondModuleNotOK
 #      └───────────────┘ ── Module name, SecondModuleNotOK, should match its file name, single_module_file.
 A file in which a module is implemented should have the name of the module it contains.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/single_module_file.jl(8, 8):
 module SecondModuleNotOK
 #      └───────────────┘ ── Module name `SecondModuleNotOK` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 
 tests/single_module_file.jl(15, 8):
 module ThirdInFile
 #      └─────────┘ ── Module name, ThirdInFile, should match its file name, single_module_file.
 A file in which a module is implemented should have the name of the module it contains.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 

@@ -13,7 +13,7 @@ function check(union::SyntaxNode)
         end
     end
     report_violation(union; severity=3,
-            rule_id="asml-implement-unions-as-consts",
+            rule_id="implement-unions-as-consts",
             user_msg="Declare this Union as a const type before using it.",
             summary="Implement Unions as const.")
 end

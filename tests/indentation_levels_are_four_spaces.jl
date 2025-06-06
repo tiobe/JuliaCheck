@@ -23,15 +23,15 @@ function get_data!(lote_inventory, item)
     request = AlignmentAnalyzer.RetrieveData.Request(
                                                 gofreId = item[Key_GofreId],
                                                 processName = item[Key_Query],
-                                               # ruleid: asml-indentation-levels-are-four-spaces
+                                               # ruleid: indentation-levels-are-four-spaces
                                                  dataSpec = item[Key_QueryData],
                                                 saveCalc = true)
 
     result[Key_QueryStatus], result[Key_QueryResult] =
-        # ruleid: asml-indentation-levels-are-four-spaces
+        # ruleid: indentation-levels-are-four-spaces
           AlignmentAnalyzer.RetrieveData.retrieveDataFrame!(lote_inventory, request)
     return result
-# ruleid: asml-indentation-levels-are-four-spaces
+# ruleid: indentation-levels-are-four-spaces
  end
 
 #=

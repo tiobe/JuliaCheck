@@ -5,77 +5,77 @@ tests/module_name_casing.jl(1, 8):
 module bad_module_name
 #      └─────────────┘ ── Module name, bad_module_name, should match its file name, module_name_casing.
 A file in which a module is implemented should have the name of the module it contains.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/module_name_casing.jl(4, 8):
 module GoodModuleName
 #      └────────────┘ ── Module 'GoodModuleName' should be inside 'bad_module_name' or in its own file.
 Implement a maximum of one module per Julia file.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/module_name_casing.jl(7, 8):
 module aBadModuleName
 #      └────────────┘ ── Module 'aBadModuleName' should be inside 'bad_module_name' or in its own file.
 Implement a maximum of one module per Julia file.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/module_name_casing.jl(10, 8):
 module Bad_Module_Name_I_Guess
 #      └─────────────────────┘ ── Module 'Bad_Module_Name_I_Guess' should be inside 'bad_module_name' or in its own file.
 Implement a maximum of one module per Julia file.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/module_name_casing.jl(13, 8):
 module A    # Is this OK?
 #      ╙ ── Module 'A' should be inside 'bad_module_name' or in its own file.
 Implement a maximum of one module per Julia file.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/module_name_casing.jl(1, 8):
 module bad_module_name
 #      └─────────────┘ ── Module name `bad_module_name` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 
 tests/module_name_casing.jl(4, 8):
 module GoodModuleName
 #      └────────────┘ ── Module name, GoodModuleName, should match its file name, module_name_casing.
 A file in which a module is implemented should have the name of the module it contains.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/module_name_casing.jl(7, 8):
 module aBadModuleName
 #      └────────────┘ ── Module name, aBadModuleName, should match its file name, module_name_casing.
 A file in which a module is implemented should have the name of the module it contains.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/module_name_casing.jl(7, 8):
 module aBadModuleName
 #      └────────────┘ ── Module name `aBadModuleName` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 
 tests/module_name_casing.jl(10, 8):
 module Bad_Module_Name_I_Guess
 #      └─────────────────────┘ ── Module name, Bad_Module_Name_I_Guess, should match its file name, module_name_casing.
 A file in which a module is implemented should have the name of the module it contains.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/module_name_casing.jl(10, 8):
 module Bad_Module_Name_I_Guess
 #      └─────────────────────┘ ── Module name `Bad_Module_Name_I_Guess` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 
 tests/module_name_casing.jl(13, 8):
 module A    # Is this OK?
 #      ╙ ── Module name, A, should match its file name, module_name_casing.
 A file in which a module is implemented should have the name of the module it contains.
-Rule: asml-single-module-file. Severity: 5
+Rule: single-module-file. Severity: 5
 
 tests/module_name_casing.jl(13, 8):
 module A    # Is this OK?
 #      ╙ ── Module name `A` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 

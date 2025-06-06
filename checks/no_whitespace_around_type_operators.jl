@@ -39,7 +39,7 @@ function check(node::GreenNode)
         report_violation(index = source_index() + offset, len=2,
                          line = lines_count(), col = source_column() + offset,
                          severity=7,
-                         rule_id="asml-no-whitespace-around-type-operators",
+                         rule_id="no-whitespace-around-type-operators",
                          user_msg="Omit white spaces around this operator.",
                          summary="No whitespace around :: or <:.")
     end

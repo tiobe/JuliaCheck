@@ -5,17 +5,17 @@ tests/module_import_location.jl(1, 8):
 module module_import_location
 #      └────────────────────┘ ── Module name `module_import_location` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 
 tests/module_import_location.jl(11, 5):
     using Sys # Bad: other code appears before the import list
 #   └───────┘ ── Move imports to the top of the module, before any actual code.
 Packages should be imported after the module keyword.
-Rule: asml-module-import-location. Severity: 9
+Rule: module-import-location. Severity: 9
 
 tests/module_import_location.jl(14, 5):
     import ..SomeSubmodule
 #   └────────────────────┘ ── Move imports to the top of the module, before any actual code.
 Packages should be imported after the module keyword.
-Rule: asml-module-import-location. Severity: 9
+Rule: module-import-location. Severity: 9
 

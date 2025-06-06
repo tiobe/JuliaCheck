@@ -5,17 +5,17 @@ tests/document_constants.jl(3, 1):
 const MAGTHRESHOLD::Float64 = 3.00 # In ppm
 └────────────────────────────────┘ ── Const value MAGTHRESHOLD has no docstring.
 Constants must have a docstring.
-Rule: asml-xxxx-document-constants. Severity: 7
+Rule: document-constants. Severity: 7
 
 tests/document_constants.jl(4, 1):
 const THEANSWER = 42
 └──────────────────┘ ── Const value THEANSWER has no docstring.
 Constants must have a docstring.
-Rule: asml-xxxx-document-constants. Severity: 7
+Rule: document-constants. Severity: 7
 
 tests/document_constants.jl(9, 1):
 const UNDOCUMENTED_GLOBAL_ITEM = MyType(3)
 └────────────────────────────────────────┘ ── Const value UNDOCUMENTED_GLOBAL_ITEM has no docstring.
 Constants must have a docstring.
-Rule: asml-xxxx-document-constants. Severity: 7
+Rule: document-constants. Severity: 7
 

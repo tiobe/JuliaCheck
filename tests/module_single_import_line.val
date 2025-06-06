@@ -5,11 +5,11 @@ tests/module_single_import_line.jl(1, 8):
 module module_single_import_line
 #      └───────────────────────┘ ── Module name `module_single_import_line` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 
 tests/module_single_import_line.jl(6, 5):
     using LinearAlgebra, Random, Statistics, Test
 #   └───────────────────────────────────────────┘ ── Import only one package per line.
 Lists of imported/used packages should only specify a single package per line.
-Rule: asml-module-single-import-line. Severity: 9
+Rule: module-single-import-line. Severity: 9
 

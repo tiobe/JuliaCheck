@@ -1,4 +1,4 @@
-module FunctionArgumentsCasing
+module FunctionArgumentsLowerSnakeCase
 
 import JuliaSyntax: SyntaxNode, @K_str, kind, children, numchildren
 using ...Properties: find_first_of_kind, is_lower_snake, report_violation
@@ -20,7 +20,7 @@ function check(f_name::SyntaxNode, f_arg::SyntaxNode)
     arg_name = string(f_arg)
     if ! is_lower_snake(arg_name)
         report_violation(f_arg; severity=7,
-                rule_id="asml-function-arguments-lower-snake-case",
+                rule_id="function-arguments-lower-snake-case",
                 user_msg="Argument '$arg_name' of function '$f_name' must be written in \"lower_snake_case\".",
                 summary="Function arguments are written in lower_snake_case.")
     end

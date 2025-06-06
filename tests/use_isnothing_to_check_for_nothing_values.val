@@ -5,23 +5,23 @@ tests/use_isnothing_to_check_for_nothing_values.jl(2, 22):
     return value === nothing || typeof(value) == Nothing
 #                    └─────┘ ── Detected comparison with nothing.
 Use isnothing to check for nothing values.
-Rule: asml-use-isnothing-to-check-for-nothing-values. Severity: 3
+Rule: use-isnothing-to-check-for-nothing-values. Severity: 3
 
 tests/use_isnothing_to_check_for_nothing_values.jl(2, 50):
     return value === nothing || typeof(value) == Nothing
 #                                                └─────┘ ── Detected comparison with Nothing.
 Use isnothing to check for nothing values.
-Rule: asml-use-isnothing-to-check-for-nothing-values. Severity: 3
+Rule: use-isnothing-to-check-for-nothing-values. Severity: 3
 
 tests/use_isnothing_to_check_for_nothing_values.jl(4, 27):
 is_not_nothing(x) = x !== nothing || typeof(x) != Nothing
 #                         └─────┘ ── Detected comparison with nothing.
 Use isnothing to check for nothing values.
-Rule: asml-use-isnothing-to-check-for-nothing-values. Severity: 3
+Rule: use-isnothing-to-check-for-nothing-values. Severity: 3
 
 tests/use_isnothing_to_check_for_nothing_values.jl(4, 51):
 is_not_nothing(x) = x !== nothing || typeof(x) != Nothing
 #                                                 └─────┘ ── Detected comparison with Nothing.
 Use isnothing to check for nothing values.
-Rule: asml-use-isnothing-to-check-for-nothing-values. Severity: 3
+Rule: use-isnothing-to-check-for-nothing-values. Severity: 3
 

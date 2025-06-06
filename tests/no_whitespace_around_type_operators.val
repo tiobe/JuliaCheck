@@ -5,65 +5,65 @@ tests/no_whitespace_around_type_operators.jl(1, 8):
 module no_whitespace_around_type_operators
 #      └─────────────────────────────────┘ ── Module name `no_whitespace_around_type_operators` should be written in UpperCamelCase.
 Package and module names should be written in UpperCamelCase.
-Rule: asml-module-name-casing. Severity: 5
+Rule: module-name-casing. Severity: 5
 
 tests/no_whitespace_around_type_operators.jl(4, 34):
     function foo(arg :: Float64) :: Nothing
 #                                └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 
 tests/no_whitespace_around_type_operators.jl(4, 22):
     function foo(arg :: Float64) :: Nothing
 #                    └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 
 tests/no_whitespace_around_type_operators.jl(9, 32):
     function bar(arg:: Float64):: Nothing return round(arg) end
 #                              └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 
 tests/no_whitespace_around_type_operators.jl(9, 21):
     function bar(arg:: Float64):: Nothing return round(arg) end
 #                   └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 
 tests/no_whitespace_around_type_operators.jl(10, 33):
     function kar(arg ::Float64) ::Nothing return round(arg) end
 #                               └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 
 tests/no_whitespace_around_type_operators.jl(10, 22):
     function kar(arg ::Float64) ::Nothing return round(arg) end
 #                    └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 
 tests/no_whitespace_around_type_operators.jl(11, 22):
     function roo(arg ::Vector{<: Number})::Nothing return length(arg) end
 #                    └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 
 tests/no_whitespace_around_type_operators.jl(11, 31):
     function roo(arg ::Vector{<: Number})::Nothing return length(arg) end
 #                             └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 
 tests/no_whitespace_around_type_operators.jl(12, 31):
     function doo(arg::Vector{ <: Number})::Nothing return length(arg) end
 #                             └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 
 tests/no_whitespace_around_type_operators.jl(13, 17):
     Base.string(:: Type{NotOKStatus}) = "NOK"
 #               └┘ ── Omit white spaces around this operator.
 No whitespace around :: or <:.
-Rule: asml-no-whitespace-around-type-operators. Severity: 7
+Rule: no-whitespace-around-type-operators. Severity: 7
 

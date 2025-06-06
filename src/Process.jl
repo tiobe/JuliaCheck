@@ -7,24 +7,26 @@ import JuliaSyntax: GreenNode, SyntaxNode, SourceFile, ParseError, @K_str,
 # include("SymbolTable.jl")
 # import .SymbolTable
 
-include("Properties.jl")
-using .Properties
-
-include("Checks.jl")
-import .Checks
+using ..Properties
+import ..Checks
 
 export check
 
 
-function check(file_name::String)
+function check(file_name::String; print_ast = false, print_llt = false)
     Properties.SF = SourceFile(; filename=file_name)
     ast = parse(SF)
     if isnothing(ast)
         @error "Couldn't parse file '$file_name'"
     else
-        @debug "Full AST for the file:" ast
-        # @debug "\n" * sprint(show, MIME"text/plain"(), ast.raw, string(JS.sourcetext(SF)))
-        # TODO Perhaps, printing the GreenNode tree should be an explicit separate option.
+        if print_ast
+            # @info "Full AST for the file:" ast
+            show(stdout, MIME"text/plain"(), ast)
+        end
+        if print_llt
+            show(stdout, MIME"text/plain"(), ast.raw, string(JS.sourcetext(SF)))
+            # @debug "\n" * sprint(show, MIME"text/plain"(), ast.raw, string(JS.sourcetext(SF)))
+        end
         process(ast)
         #if trivia_checks_enabled
             process_with_trivia(ast.raw, ast.raw)
@@ -59,12 +61,12 @@ function process(node::SyntaxNode)
 
         elseif is_module(node)
             #SymbolTable.enter_module(node)
-            Checks.SingleModuleFile.check(node)
-            Checks.ModuleNameCasing.check(node)
-            Checks.ModuleEndComment.check(node)
-            Checks.ModuleImportLocation.check(node)
-            Checks.ModuleIncludeLocation.check(node)
-            Checks.ModuleSingleImportLine.check(node)
+            Checks.check("single-module-file", node)
+            Checks.check("module-name-casing", node)
+            Checks.check("module-end-comment", node)
+            Checks.check("module-import-location", node)
+            Checks.check("module-include-location", node)
+            Checks.check("module-single-import-line", node)
 
         elseif is_operator(node)
             process_operator(node)
@@ -82,7 +84,7 @@ function process(node::SyntaxNode)
             process_type_declaration(node)
 
         elseif is_constant(node)
-            Checks.DocumentConstants.check(node)
+            Checks.check("document-constants", node)
 
         elseif is_union_decl(node)
             process_unions(node)
@@ -107,7 +109,7 @@ function process_operator(node::AnyTree)
         # something with prefix operators
 
     elseif is_infix_operator(node)
-        #Checks.SpaceAroundInfixOperators.check(node)
+        #Checks.check("SpaceAroundInfixOperators", node)
 
         if is_assignment(node) process_assignment(node) end
         if is_eq_neq_comparison(node)
@@ -115,10 +117,10 @@ function process_operator(node::AnyTree)
                 @debug "A comparison with a number of children != 3" node
             else
                 lhs, _, rhs = children(node)
-                Checks.UseIsinfToCheckForInfinite.check.([lhs, rhs])
-                Checks.UseIsnanToCheckForNan.check.([lhs, rhs])
-                Checks.UseIsmissingToCheckForMissingValues.check.([lhs, rhs])
-                Checks.UseIsnothingToCheckForNothingValues.check.([lhs, rhs])
+                Checks.check.("use-isinf-to-check-for-infinite", [lhs, rhs])
+                Checks.check.("use-isnan-to-check-for-nan", [lhs, rhs])
+                Checks.check.("use-ismissing-to-check-for-missing-values", [lhs, rhs])
+                Checks.check.("use-isnothing-to-check-for-nothing-values", [lhs, rhs])
             end
         end
 
@@ -138,7 +140,7 @@ function process_function(node::SyntaxNode)
         # we might see a clue of what we are dealing with.
         return nothing
     end
-    Checks.FunctionIdentifiersCasing.check(fname)
+    Checks.check("function-identifiers-in-lower-snake-case", fname)
     #SymbolTable.declare(fname)
     #SymbolTable.enter_scope()
     named_arguments = []
@@ -149,61 +151,61 @@ function process_function(node::SyntaxNode)
             named_arguments = children(arg)
         else
             # SymbolTable.declare(arg)
-            Checks.FunctionArgumentsCasing.check(fname, arg)
+            Checks.check("function-arguments-lower-snake-case", fname, arg)
         end
     end
     for arg in named_arguments
-        Checks.FunctionArgumentsCasing.check(fname, arg)
+        Checks.check("function-arguments-lower-snake-case", fname, arg)
     end
 
     body = get_func_body(node)
     if ! isnothing(body)
-        Checks.LongFormFunctionsHaveReturnStatement.check(body)
-        Checks.ShortHandFunctionTooComplicated.check(body)
+        Checks.check("long-form-functions-have-a-terminating-return-statement", body)
+        Checks.check("short-hand-function-too-complicated", body)
     end
 end
 
 function process_assignment(node::SyntaxNode)
     lhs = get_assignee(node)
-    Checks.DoNotSetVariablesToInf.check(node)
-    Checks.DoNotSetVariablesToNan.check(node)
+    Checks.check("do-not-set-variables-to-inf", node)
+    Checks.check("do-not-set-variables-to-nan", node)
     # if !SymbolTable.is_declared(lhs)
     #     SymbolTable.declare(lhs)
     # end
-    # Checks.AvoidGlobals.check(node)
+    # Checks.check("AvoidGlobals", node)
 end
 process_assignment(_::GreenNode) = nothing
 
 function process_literal(node::SyntaxNode)
     if     (kind(node) == K"Integer")
     elseif (kind(node) == K"Float")
-        Checks.LeadingAndTrailingDigits.check(node)
+        Checks.check("leading-and-trailing-digits", node)
     end
 end
 
 function process_struct(node::SyntaxNode)
-    Checks.TypeNamesCasing.check(node)
+    Checks.check("type-names-upper-camel-case", node)
     for field in get_struct_members(node)
-        Checks.StructMembersCasing.check(field)
+        Checks.check("struct-members-are-in-lower-snake-case", field)
     end
 end
 
 function process_type_declaration(node::SyntaxNode)
-    Checks.AbstractTypeNames.check(node)
+    Checks.check("prefix-of-abstract-type-names", node)
 end
 
 function process_type_restriction(_::SyntaxNode) return nothing end
 function process_type_restriction(node::GreenNode)
-    Checks.NoWhitespaceAroundTypeOperators.check(node)
+    Checks.check("no-whitespace-around-type-operators", node)
 end
 
 function process_unions(node::SyntaxNode)
-    Checks.TooManyTypesInUnions.check(node)
-    Checks.ImplementUnionsAsConsts.check(node)
+    Checks.check("too-many-types-in-unions", node)
+    Checks.check("implement-unions-as-consts", node)
 end
 
 function process_loop(node::SyntaxNode)
-    if kind(node) == K"while" Checks.InfiniteWhileLoop.check(node) end
+    if kind(node) == K"while" Checks.check("infinite-while-loop", node) end
 end
 
 function process_with_trivia(node::GreenNode, parent::GreenNode)
@@ -214,8 +216,8 @@ function process_with_trivia(node::GreenNode, parent::GreenNode)
         for x in children(node) process_with_trivia(x, node) end
     else
         if is_whitespace(node)
-            Checks.UseSpacesInsteadOfTabs.check(node)
-            Checks.IndentationLevelsAreFourSpaces.check(node)
+            Checks.check("use-spaces-instead-of-tabs", node)
+            Checks.check("indentation-levels-are-four-spaces", node)
         end
         increase_counters(node)
     end

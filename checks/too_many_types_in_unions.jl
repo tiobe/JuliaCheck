@@ -8,7 +8,7 @@ function check(union_decl::SyntaxNode)
     union_types = children(union_decl)[2:end] # discard the 1st, which is "Union"
     if length(union_types) > 4
         report_violation(union_decl; severity=6,
-                rule_id="asml-too-many-types-in-unions",
+                rule_id="too-many-types-in-unions",
                 user_msg="Detected a union with too many types.",
                 summary="Too many types: there should be no more than 4 types in a Union.")
     end

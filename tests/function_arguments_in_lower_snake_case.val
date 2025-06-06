@@ -5,17 +5,17 @@ tests/function_arguments_in_lower_snake_case.jl(1, 15):
 function foo1(HamList::Vector{<:Real}) println(HamList); return nothing end
 #             └─────┘ ── Argument 'HamList' of function 'foo1' must be written in "lower_snake_case".
 Function arguments are written in lower_snake_case.
-Rule: asml-function-arguments-lower-snake-case. Severity: 7
+Rule: function-arguments-lower-snake-case. Severity: 7
 
 tests/function_arguments_in_lower_snake_case.jl(6, 20):
 function foo(x, y; NamedArg::String="nothing")
 #                  └──────┘ ── Argument 'NamedArg' of function 'foo' must be written in "lower_snake_case".
 Function arguments are written in lower_snake_case.
-Rule: asml-function-arguments-lower-snake-case. Severity: 7
+Rule: function-arguments-lower-snake-case. Severity: 7
 
 tests/function_arguments_in_lower_snake_case.jl(14, 7):
 far(; NamedArg::Int) = named_arg
 #     └──────┘ ── Argument 'NamedArg' of function 'far' must be written in "lower_snake_case".
 Function arguments are written in lower_snake_case.
-Rule: asml-function-arguments-lower-snake-case. Severity: 7
+Rule: function-arguments-lower-snake-case. Severity: 7
 

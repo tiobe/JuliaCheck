@@ -5,13 +5,13 @@ tests/use_ismissing_to_check_for_missing_values.jl(1, 33):
 my_is_missing(value) = value == missing || typeof(value) == Missing
 #                               └─────┘ ── Detected comparison with missing.
 Use ismissing to check for missing values.
-Rule: asml-use-ismissing-to-check-for-missing-values. Severity: 3
+Rule: use-ismissing-to-check-for-missing-values. Severity: 3
 
 tests/use_ismissing_to_check_for_missing_values.jl(1, 61):
 my_is_missing(value) = value == missing || typeof(value) == Missing
 #                                                           └─────┘ ── Detected comparison with Missing.
 Use ismissing to check for missing values.
-Rule: asml-use-ismissing-to-check-for-missing-values. Severity: 3
+Rule: use-ismissing-to-check-for-missing-values. Severity: 3
 
 tests/use_ismissing_to_check_for_missing_values.jl(2, 34):
 my_not_missing(value) = value != missing || typeof(value) != Missing

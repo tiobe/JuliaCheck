@@ -25,7 +25,7 @@ function check(modjule::SyntaxNode)
                 included_pkg = get_imported_pkg(previous)
                 if !is_include(previous) || last(imported_module) != last(included_pkg)
                     report_violation(node;
-                        severity=9, rule_id="asml-module-include-location",
+                        severity=9, rule_id="module-include-location",
                         user_msg="Group include's after all import/using lines.",
                         summary="The list of included files appears after the list of imported packages.")
                 end

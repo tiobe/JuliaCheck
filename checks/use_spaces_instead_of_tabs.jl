@@ -14,7 +14,7 @@ function check(node::GreenNode)
                          line = lines_count() + 1,
                          col = match.start - 1,
                          len=1, severity=7,
-                         rule_id="asml-xxxx-use-spaces-instead-of-tabs",
+                         rule_id="use-spaces-instead-of-tabs",
                          user_msg="There are tab characters here.",
                          summary="Use spaces instead of tabs for indentation.")
     end

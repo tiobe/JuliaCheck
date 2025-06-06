@@ -19,14 +19,14 @@ function check(modjule::SyntaxNode)
     for node in imports[1 : first_include-1]
         if numchildren(node) > 1
             report_violation(node;
-                severity=9, rule_id="asml-module-single-import-line",
+                severity=9, rule_id="module-single-import-line",
                 user_msg="Import only one package per line.",
                 summary="Lists of imported/used packages should only specify a single package per line.")
         else
             (pkg, pkg_name) = get_imported_pkg(node)
             if pkg_name < previous
                 report_violation(pkg;
-                    severity=9, rule_id="asml-module-single-import-line",
+                    severity=9, rule_id="module-single-import-line",
                     user_msg="Keep import/using declarations in alphabetic order.",
                     summary="The list of packages should be in alphabetic order.")
             else
@@ -42,7 +42,7 @@ function check(modjule::SyntaxNode)
         (pkg, pkg_name) = get_imported_pkg(node)
         if pkg_name < previous
             report_violation(pkg;
-                severity=9, rule_id="asml-module-single-import-line",
+                severity=9, rule_id="module-single-import-line",
                 user_msg="Keep import/using declarations in alphabetic order.",
                 summary="The list of packages should be in alphabetic order.")
         else

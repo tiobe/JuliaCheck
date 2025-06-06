@@ -22,11 +22,11 @@ function check(node::SyntaxNode)::Nothing
     # Check if right-hand side is an Inf value
     if is_inf_value(rhs)
         _, var_name = get_assignee(node)
-        nan_type = extract_nan_type(rhs)
+        inf_type = extract_inf_type(rhs)
         report_violation(rhs;
-            severity=3, rule_id="asml-do-not-set-variables-to-nan",
-            user_msg = isnothing(var_name) ? "Assignment of $nan_type detected" :
-                                    "Variable '$var_name' is assigned $nan_type",
+            severity=3, rule_id="do-not-set-variables-to-inf",
+            user_msg = isnothing(var_name) ? "Assignment of $inf_type detected" :
+                                    "Variable '$var_name' is assigned $inf_type",
             summary = "Do not set variables to Inf, Inf16, Inf32 or Inf64")
     end
 end
@@ -56,7 +56,7 @@ function is_inf_value(node::SyntaxNode)::Bool
     return false
 end
 
-function extract_nan_type(node::SyntaxNode)::String
+function extract_inf_type(node::SyntaxNode)::String
     if kind(node) == K"Identifier"
         return string(node)
     elseif kind(node) == K"."

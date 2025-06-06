@@ -5,17 +5,17 @@ tests/do_not_set_variables_to_inf.jl(2, 18):
 value::Float64 = Inf
 #                └─┘ ── Assignment of Inf detected
 Do not set variables to Inf, Inf16, Inf32 or Inf64
-Rule: asml-do-not-set-variables-to-nan. Severity: 3
+Rule: do-not-set-variables-to-inf. Severity: 3
 
 tests/do_not_set_variables_to_inf.jl(4, 17):
 arrvalue[end] = Inf16
 #               └───┘ ── Assignment of Inf16 detected
 Do not set variables to Inf, Inf16, Inf32 or Inf64
-Rule: asml-do-not-set-variables-to-nan. Severity: 3
+Rule: do-not-set-variables-to-inf. Severity: 3
 
 tests/do_not_set_variables_to_inf.jl(7, 18):
 const my_value = Inf32
 #                └───┘ ── Variable 'my_value' is assigned Inf32
 Do not set variables to Inf, Inf16, Inf32 or Inf64
-Rule: asml-do-not-set-variables-to-nan. Severity: 3
+Rule: do-not-set-variables-to-inf. Severity: 3
 

@@ -2,26 +2,26 @@
 >> Processing file 'tests/indentation_levels_are_four_spaces.jl'...
 
 tests/indentation_levels_are_four_spaces.jl(26, 1):
-                                               # ruleid: asml-indentation-levels-are-four-spaces
+                                               # ruleid: indentation-levels-are-four-spaces
 └─────────────────────────────────────────────┘ ── Indentation here is 47, which is not multiple of 4.
 Indentation will be done in multiples of four spaces.
-Rule: asml-indentation-levels-are-four-spaces. Severity: 7
+Rule: indentation-levels-are-four-spaces. Severity: 7
 
 tests/indentation_levels_are_four_spaces.jl(27, 1):
                                                  dataSpec = item[Key_QueryData],
 └───────────────────────────────────────────────┘ ── Indentation here is 49, which is not multiple of 4.
 Indentation will be done in multiples of four spaces.
-Rule: asml-indentation-levels-are-four-spaces. Severity: 7
+Rule: indentation-levels-are-four-spaces. Severity: 7
 
 tests/indentation_levels_are_four_spaces.jl(32, 1):
           AlignmentAnalyzer.RetrieveData.retrieveDataFrame!(lote_inventory, request)
 └────────┘ ── Indentation here is 10, which is not multiple of 4.
 Indentation will be done in multiples of four spaces.
-Rule: asml-indentation-levels-are-four-spaces. Severity: 7
+Rule: indentation-levels-are-four-spaces. Severity: 7
 
 tests/indentation_levels_are_four_spaces.jl(35, 1):
  end
 ╙ ── Indentation here is 1, which is not multiple of 4.
 Indentation will be done in multiples of four spaces.
-Rule: asml-indentation-levels-are-four-spaces. Severity: 7
+Rule: indentation-levels-are-four-spaces. Severity: 7
 

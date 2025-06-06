@@ -5,11 +5,11 @@ tests/type_names_upper_camel_case.jl(2, 8):
 struct myStruct end     # Bad
 #      └──────┘ ── Type names such as myStruct should be written in Upper Camel Case.
 Type names in UpperCamelCase.
-Rule: asml-type-names-upper-camel-case. Severity: 3
+Rule: type-names-upper-camel-case. Severity: 3
 
 tests/type_names_upper_camel_case.jl(3, 8):
 struct MYSTRUCT end     # Bad
 #      └──────┘ ── Type names such as MYSTRUCT should be written in Upper Camel Case.
 Type names in UpperCamelCase.
-Rule: asml-type-names-upper-camel-case. Severity: 3
+Rule: type-names-upper-camel-case. Severity: 3
 
