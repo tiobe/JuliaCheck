@@ -3,15 +3,16 @@ module Properties
 import JuliaSyntax: Kind, GreenNode, SyntaxNode, SourceFile, @K_str, @KSet_str,
     children, head, kind, numchildren, span, untokenize, JuliaSyntax as JS
 
-export AnyTree, MAX_LINE_LENGTH, opens_scope, closes_module, closes_scope,
-    haschildren, increase_counters, is_abstract, is_assignment, is_constant,
-    is_eq_neq_comparison, is_function, is_import, is_include, is_infix_operator,
-    is_loop, is_literal, is_lower_snake, is_module, is_operator, is_struct,
-    is_toplevel, is_type_op, is_union_decl, is_upper_camel_case, expr_depth,
-    expr_size, find_first_of_kind, get_assignee, get_func_arguments,
-    get_func_body, get_func_name, get_imported_pkg, get_module_name,
-    get_struct_members, get_struct_name, lines_count, report_violation,
-    reset_counters, SF, source_column, source_index, source_text
+export AnyTree, EOL, MAX_LINE_LENGTH, opens_scope, closes_module, closes_scope,
+    fake_green_node, haschildren, increase_counters, is_abstract, is_assignment,
+    is_constant, is_eq_neq_comparison, is_function, is_import, is_include,
+    is_infix_operator, is_loop, is_literal, is_lower_snake, is_module,
+    is_operator, is_separator, is_struct, is_toplevel, is_type_op,
+    is_union_decl, is_upper_camel_case, expr_depth, expr_size,
+    find_first_of_kind, get_assignee, get_func_arguments, get_func_body,
+    get_func_name, get_imported_pkg, get_module_name, get_struct_members,
+    get_struct_name, lines_count, report_violation, reset_counters, SF,
+    source_column, source_index, source_text
 
 
 ## Types
@@ -27,12 +28,13 @@ SOURCE_INDEX = 0
 SOURCE_LINE = 0
 SOURCE_COL = 0
 const MAX_LINE_LENGTH = 92
+const EOL = (Sys.iswindows() ? "\n\r" : "\n")
 
 
 ## Functions
 
 function report_violation(node::SyntaxNode;
-                          severity::Int, user_msg::String,
+                          severity::Integer, user_msg::String,
                           summary::String, rule_id::String)
     line, column = JS.source_location(node)
     printstyled("\n$(JS.filename(node))($line, $(column)):\n";
@@ -41,9 +43,10 @@ function report_violation(node::SyntaxNode;
                                context_lines_after=0, context_lines_before=0)
     _report_common(severity, rule_id, summary)
 end
-function report_violation(; index::Int, len::Int, line::Int, col::Int,
-                            severity::Int, user_msg::String,
-                            summary::String, rule_id::String)
+function report_violation(; index::Integer, len::Integer,
+                          line::Integer, col::Integer,
+                          severity::Integer, user_msg::String,
+                          summary::String, rule_id::String)
     printstyled("\n$(JS.filename(SF))($line, $col):\n";
                 underline=true)
     JS.highlight(stdout, SF, index:index+len-1;
@@ -59,6 +62,10 @@ function _report_common(severity::Int, rule_id::String, summary::String)
     printstyled(" $severity\n")
 end
 
+
+function fake_green_node(kind::Kind; length::Int=0)
+    return GreenNode{Kind}(kind, length, nothing)
+end
 
 function haschildren(node::AnyTree)::Bool
     subnodes = children(node)
@@ -83,6 +90,7 @@ is_struct(    node::AnyTree)::Bool = kind(node) == K"struct"
 is_abstract(  node::AnyTree)::Bool = kind(node) == K"abstract"
 is_loop(      node::AnyTree)::Bool = kind(node) in KSet"while for"
 is_constant(  node::AnyTree)::Bool = kind(node) == K"const"
+is_separator( node::AnyTree)::Bool = kind(node) in KSet", ;"
 
 function is_union_decl(node::SyntaxNode)::Bool
     if kind(node) == K"curly" && haschildren(node)
@@ -289,13 +297,15 @@ function increase_counters(node::GreenNode)
         SOURCE_COL = span(node) - (Sys.iswindows() ? 1 : 0)
     elseif kind(node) == K"String"
         txt = source_text(node)
-        n = count(r"\n", txt)
-        SOURCE_LINE += n
-        if n > 0
+        n = count('\n', txt)
+        if n == 0
+            SOURCE_COL += span(node)
+        else
+            SOURCE_LINE += n
             if n > 1
                 @debug "String with $n line breaks:" txt    # TODO Delete me!
             end
-            SOURCE_COL = length(txt) - findlast('\n', txt)
+            SOURCE_COL = length(txt) - last(findfirst(EOL, txt))
         end
     else
         SOURCE_COL += span(node)
@@ -305,11 +315,11 @@ end
 source_text() = JS.sourcetext(SF)
 function source_text(node::GreenNode, offset::Integer=0)
     start = SOURCE_INDEX + offset
-    length = span(node) - 1
+    length = span(node)
     return source_text(start, length)
 end
-source_text(from::Integer, howmuch::Integer) = JS.sourcetext(SF)[from : from+howmuch]
-line_breaks(node::GreenNode) = count(r"\n", source_text(node))
+source_text(from::Integer, howmuch::Integer) = JS.sourcetext(SF)[from : from+howmuch-1]
+line_breaks(node::GreenNode) = count('\n', source_text(node))
 source_index() = SOURCE_INDEX
 lines_count() = SOURCE_LINE
 source_column() = SOURCE_COL

@@ -217,8 +217,12 @@ function process_with_trivia(node::GreenNode, parent::GreenNode)
             Checks.UseSpacesInsteadOfTabs.check(node)
             Checks.IndentationLevelsAreFourSpaces.check(node)
             Checks.OmitTrailingWhiteSpace.check(node)
+
         elseif kind(node) == K"String"
             Checks.OmitTrailingWhiteSpace.check(node)
+
+        elseif is_separator(node)
+            Checks.SingleSpaceAfterCommasAndSemicolons.check(node, parent)
         end
         increase_counters(node)
     end
