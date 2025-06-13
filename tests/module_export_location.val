@@ -1,0 +1,21 @@
+
+>> Processing file 'tests/module_export_location.jl'...
+
+tests/module_export_location.jl(1, 8):
+module module_export_location
+#      └────────────────────┘ ── Module name `module_export_location` should be written in UpperCamelCase.
+Package and module names should be written in UpperCamelCase.
+Rule: asml-module-name-casing. Severity: 5
+
+tests/module_export_location.jl(15, 5):
+    export bar # Bad: exports should be placed below the includes list
+#   └────────┘ ── Exports should be implemented after the include instructions.
+Location of exported functions and exported structs.
+Rule: module-export-location. Severity: 9
+
+tests/module_export_location.jl(16, 5):
+    export foo
+#   └────────┘ ── Exports should be implemented after the include instructions.
+Location of exported functions and exported structs.
+Rule: module-export-location. Severity: 9
+
