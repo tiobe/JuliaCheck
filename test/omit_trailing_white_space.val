@@ -1,6 +1,24 @@
 
 >> Processing file 'test/omit_trailing_white_space.jl'...
 
+test/omit_trailing_white_space.jl(3, 7):
+const MAG_THRESHOLD::Float64 = 3e-6  
+#     └───────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/omit_trailing_white_space.jl(9, 7):
+const THE_ANSWER = 42
+#     └────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/omit_trailing_white_space.jl(12, 7):
+const E_VERO = true
+#     └────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
 test/omit_trailing_white_space.jl(4, 1):
 const MAG_THRESHOLD::Float64 = 3e-6  
 #                                  └┘ ── Omit spaces at the end of a line.

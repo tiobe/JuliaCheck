@@ -1,0 +1,81 @@
+
+>> Processing file 'test/global_variables_upper_snake_case.jl'...
+
+test/global_variables_upper_snake_case.jl(1, 1):
+some_number::Float64 = 1
+└─────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/global_variables_upper_snake_case.jl(1, 1):
+some_number::Float64 = 1
+└─────────┘ ── Variable some_number should be written in UPPER_SNAKE_CASE.
+Casing of globals.
+Rule: asml-global-variables-upper-snake-case. Severity: 3
+
+test/global_variables_upper_snake_case.jl(2, 14):
+const global some_other_number = 42
+#            └───────────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/global_variables_upper_snake_case.jl(2, 14):
+const global some_other_number = 42
+#            └───────────────┘ ── Variable some_other_number should be written in UPPER_SNAKE_CASE.
+Casing of globals.
+Rule: asml-global-variables-upper-snake-case. Severity: 3
+
+test/global_variables_upper_snake_case.jl(5, 12):
+    global yet_another_number = 7.0
+#          └────────────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/global_variables_upper_snake_case.jl(5, 12):
+    global yet_another_number = 7.0
+#          └────────────────┘ ── Variable yet_another_number should be written in UPPER_SNAKE_CASE.
+Casing of globals.
+Rule: asml-global-variables-upper-snake-case. Severity: 3
+
+test/global_variables_upper_snake_case.jl(9, 1):
+SOME_NUMBER::Float64
+└─────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/global_variables_upper_snake_case.jl(10, 14):
+global const SOME_OTHER_NUMBER::Int = 42
+#            └───────────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/global_variables_upper_snake_case.jl(11, 7):
+const N1 = const N2 = 3.14159
+#     └┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/global_variables_upper_snake_case.jl(11, 1):
+const N1 = const N2 = 3.14159
+└───────────────────────────┘ ── Const value N1 has no docstring.
+Constants must have a docstring.
+Rule: asml-document-constants. Severity: 7
+
+test/global_variables_upper_snake_case.jl(11, 18):
+const N1 = const N2 = 3.14159
+#                └┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/global_variables_upper_snake_case.jl(11, 12):
+const N1 = const N2 = 3.14159
+#          └────────────────┘ ── Const value N2 has no docstring.
+Constants must have a docstring.
+Rule: asml-document-constants. Severity: 7
+
+test/global_variables_upper_snake_case.jl(14, 12):
+    global YET_ANOTHER_NUMBER = 7.0
+#          └────────────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+

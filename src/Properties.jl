@@ -5,11 +5,11 @@ import JuliaSyntax: Kind, GreenNode, SyntaxNode, SourceFile, @K_str, @KSet_str,
 
 export AnyTree, EOL, MAX_LINE_LENGTH, opens_scope, closes_module, closes_scope,
     fake_green_node, haschildren, increase_counters, is_abstract, is_assignment,
-    is_constant, is_eq_neq_comparison, is_export, is_function, is_global_decl,
-    is_import, is_include, is_infix_operator, is_loop, is_literal,
-    is_lower_snake, is_module, is_operator, is_separator, is_struct,
-    is_toplevel, is_type_op, is_union_decl, is_upper_camel_case, expr_depth,
-    expr_size, find_first_of_kind, get_assignee, get_func_arguments,
+    is_constant, is_eq_neq_comparison, is_export, is_fat_snake_case,
+    is_function, is_global_decl, is_import, is_include, is_infix_operator,
+    is_loop, is_literal, is_lower_snake, is_module, is_operator, is_separator,
+    is_struct, is_toplevel, is_type_op, is_union_decl, is_upper_camel_case,
+    expr_depth, expr_size, find_first_of_kind, get_assignee, get_func_arguments,
     get_func_body, get_func_name, get_imported_pkg, get_module_name,
     get_struct_members, get_struct_name, lines_count, report_violation,
     reset_counters, SF, source_column, source_index, source_text, to_pascal_case
@@ -78,6 +78,10 @@ function is_upper_camel_case(s::AbstractString)::Bool
     m = match(r"([[:upper:]][[:lower:][:digit:]]+)+", s)
     return !isnothing(m) && length(m.match) == length(s)
 end
+function is_fat_snake_case(s::AbstractString)::Bool
+    m = match(r"[[:upper:]_[:digit:]]+", s)
+    return !isnothing(m) && length(m.match) == length(s)
+end
 
 
 is_toplevel(  node::AnyTree)::Bool = kind(node) == K"toplevel"
@@ -90,7 +94,17 @@ is_abstract(  node::AnyTree)::Bool = kind(node) == K"abstract"
 is_loop(      node::AnyTree)::Bool = kind(node) in KSet"while for"
 is_constant(  node::AnyTree)::Bool = kind(node) == K"const"
 is_separator( node::AnyTree)::Bool = kind(node) in KSet", ;"
-is_global_decl(node::AnyTree)::Bool = kind(node) == K"global"
+
+function is_mod_toplevel(node::AnyTree)::Bool
+    return is_toplevel(node) ||
+            (kind(node) == K"block" && is_module(node.parent))
+end
+function is_global_decl(node::AnyTree)::Bool
+    return kind(node) ∈ KSet"global const" ||
+            # An assignment or base declaration at the (module's) top-level
+            # declares a global variable
+            (kind(node) ∈ KSet"= ::" && is_mod_toplevel(node.parent))
+end
 
 function is_union_decl(node::SyntaxNode)::Bool
     if kind(node) == K"curly" && haschildren(node)
@@ -277,12 +291,16 @@ function get_imported_pkg(node::SyntaxNode)::NodeAndString
 end
 
 
+# TODO Change name to `find_lhs_of_kind`, because it only looks at the first
+# child in each level it traverses downwards.
+"""
+Return the first left-hand side node of the given kind, going down the left-most
+sub-tree in each level from the given node.
+"""
 function find_first_of_kind(node_kind::Kind, node::AnyTree)::NullableNode
-    child = node
-    while kind(child) != node_kind && haschildren(child)
-        child = children(child)[1]
-    end
-    return kind(child) == node_kind ? child : nothing
+    return kind(node) == node_kind ? node :
+                haschildren(node) ? find_first_of_kind(node_kind, children(node)[1]) :
+                    nothing
 end
 
 expr_depth(node::SyntaxNode)::Int = (! haschildren(node)) ? 1 :
