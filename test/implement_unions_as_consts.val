@@ -43,3 +43,9 @@ test/implement_unions_as_consts.jl(15, 55):
 Implement Unions as const.
 Rule: asml-implement-unions-as-consts. Severity: 3
 
+test/implement_unions_as_consts.jl(24, 11):
+    const MyUnion = Union{Nothing, Int64}
+#         └─────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+

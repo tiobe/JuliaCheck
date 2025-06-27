@@ -1,11 +1,23 @@
 
 >> Processing file 'test/document_constants.jl'...
 
+test/document_constants.jl(3, 7):
+const MAGTHRESHOLD::Float64 = 3.00 # In ppm
+#     └──────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
 test/document_constants.jl(3, 1):
 const MAGTHRESHOLD::Float64 = 3.00 # In ppm
 └────────────────────────────────┘ ── Const value MAGTHRESHOLD has no docstring.
 Constants must have a docstring.
 Rule: asml-document-constants. Severity: 7
+
+test/document_constants.jl(4, 7):
+const THEANSWER = 42
+#     └───────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
 
 test/document_constants.jl(4, 1):
 const THEANSWER = 42
@@ -13,9 +25,33 @@ const THEANSWER = 42
 Constants must have a docstring.
 Rule: asml-document-constants. Severity: 7
 
+test/document_constants.jl(9, 7):
+const UNDOCUMENTED_GLOBAL_ITEM = MyType(3)
+#     └──────────────────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
 test/document_constants.jl(9, 1):
 const UNDOCUMENTED_GLOBAL_ITEM = MyType(3)
 └────────────────────────────────────────┘ ── Const value UNDOCUMENTED_GLOBAL_ITEM has no docstring.
 Constants must have a docstring.
 Rule: asml-document-constants. Severity: 7
+
+test/document_constants.jl(13, 7):
+const MAG_THRESHOLD::Float64 = 3e-6
+#     └───────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/document_constants.jl(16, 7):
+const THE_ANSWER = 42
+#     └────────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/document_constants.jl(19, 7):
+const E_VERO = true
+#     └────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
 

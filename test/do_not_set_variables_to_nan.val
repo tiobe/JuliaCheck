@@ -1,11 +1,23 @@
 
 >> Processing file 'test/do_not_set_variables_to_nan.jl'...
 
+test/do_not_set_variables_to_nan.jl(2, 1):
+value::Float64 = NaN
+└───┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
 test/do_not_set_variables_to_nan.jl(2, 18):
 value::Float64 = NaN
 #                └─┘ ── Do not set variables to NaN.
 Do not set variables to NaN, NaN16, NaN32 or NaN64
 Rule: asml-do-not-set-variables-to-nan. Severity: 3
+
+test/do_not_set_variables_to_nan.jl(3, 1):
+strct.value = NaN16
+└───┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
 
 test/do_not_set_variables_to_nan.jl(3, 15):
 strct.value = NaN16
@@ -13,9 +25,39 @@ strct.value = NaN16
 Do not set variables to NaN, NaN16, NaN32 or NaN64
 Rule: asml-do-not-set-variables-to-nan. Severity: 3
 
+test/do_not_set_variables_to_nan.jl(4, 1):
+arrvalue[end] = 3 * Inf - Inf   # TODO this is not detected as NaN
+└──────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/do_not_set_variables_to_nan.jl(7, 7):
+const my_value = NaN32
+#     └──────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
 test/do_not_set_variables_to_nan.jl(7, 18):
 const my_value = NaN32
 #                └───┘ ── Do not set variables to NaN.
 Do not set variables to NaN, NaN16, NaN32 or NaN64
 Rule: asml-do-not-set-variables-to-nan. Severity: 3
+
+test/do_not_set_variables_to_nan.jl(10, 1):
+value::Float64 = 0.0
+└───┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/do_not_set_variables_to_nan.jl(13, 7):
+const AdHocType = Union{Missing, Float64}
+#     └───────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/do_not_set_variables_to_nan.jl(14, 1):
+value::AdHocType = missing
+└───┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
 

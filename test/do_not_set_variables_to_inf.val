@@ -1,11 +1,29 @@
 
 >> Processing file 'test/do_not_set_variables_to_inf.jl'...
 
+test/do_not_set_variables_to_inf.jl(2, 1):
+value::Float64 = Inf
+└───┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
 test/do_not_set_variables_to_inf.jl(2, 18):
 value::Float64 = Inf
 #                └─┘ ── Do not set variables to Inf.
 Do not set variables to Inf, Inf16, Inf32 or Inf64
 Rule: asml-do-not-set-variables-to-inf. Severity: 3
+
+test/do_not_set_variables_to_inf.jl(3, 1):
+strct.value = -Inf64
+└───┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/do_not_set_variables_to_inf.jl(4, 1):
+arrvalue[end] = Inf16
+└──────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
 
 test/do_not_set_variables_to_inf.jl(4, 17):
 arrvalue[end] = Inf16
@@ -13,9 +31,33 @@ arrvalue[end] = Inf16
 Do not set variables to Inf, Inf16, Inf32 or Inf64
 Rule: asml-do-not-set-variables-to-inf. Severity: 3
 
+test/do_not_set_variables_to_inf.jl(7, 7):
+const my_value = Inf32
+#     └──────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
 test/do_not_set_variables_to_inf.jl(7, 18):
 const my_value = Inf32
 #                └───┘ ── Do not set variables to Inf.
 Do not set variables to Inf, Inf16, Inf32 or Inf64
 Rule: asml-do-not-set-variables-to-inf. Severity: 3
+
+test/do_not_set_variables_to_inf.jl(10, 1):
+value::Float64 = 0.0
+└───┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/do_not_set_variables_to_inf.jl(13, 7):
+const AdHocType = Union{Missing, Float64}
+#     └───────┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
+
+test/do_not_set_variables_to_inf.jl(14, 1):
+value::AdHocType = missing
+└───┘ ── Avoid global variables wherever possible.
+Avoid global variables when possible.
+Rule: asml-avoid-global-variables. Severity: 3
 

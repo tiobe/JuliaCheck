@@ -50,8 +50,8 @@ function process(node::SyntaxNode)
     if haschildren(node)
         if is_toplevel(node)
             SymbolTable.enter_main_module!()
-
-        elseif is_module(node)
+        end
+        if is_module(node)
             SymbolTable.enter_module!(node)
             Checks.SingleModuleFile.check(node)
             Checks.ModuleNameCasing.check(node)
@@ -60,44 +60,30 @@ function process(node::SyntaxNode)
             Checks.ModuleImportLocation.check(node)
             Checks.ModuleIncludeLocation.check(node)
             Checks.ModuleSingleImportLine.check(node)
-
-        elseif is_operator(node)
-            process_operator(node)
-
-        elseif is_loop(node)
-            process_loop(node)
-
-        elseif is_function(node)
-            process_function(node)
-
-        elseif is_struct(node)
-            process_struct(node)
-
-        elseif is_abstract(node)
-            process_type_declaration(node)
-
-        elseif is_constant(node)
-            Checks.DocumentConstants.check(node)
-
-        elseif is_union_decl(node)
-            process_unions(node)
-
-        elseif is_global_decl(node)
-            process_global(node)
         end
+
+        if is_global_decl(node) process_global(node) end
+
+        if is_loop(node) process_loop(node) end
+
+        if is_function(node) process_function(node) end
+
+        if is_struct(node) process_struct(node) end
+
+        if is_abstract(node) process_type_declaration(node) end
+
+        if is_operator(node) process_operator(node) end
+
+        if is_union_decl(node) process_unions(node) end
 
         for x in children(node) process(x) end
     else
-        if is_literal(node)
-            process_literal(node)
-        end
+        if is_literal(node) process_literal(node) end
     end
 
     # "Post-processing", before returning from this level of the tree
-    if is_module(node)
-        SymbolTable.exit_module!()
-    elseif opens_scope(node)
-        SymbolTable.exit_scope!()
+    if is_module(node) SymbolTable.exit_module!()
+    elseif opens_scope(node) SymbolTable.exit_scope!()
     end
 end
 
@@ -224,13 +210,18 @@ function process_loop(node::SyntaxNode)
 end
 
 function process_global(node::SyntaxNode)
-    if 0 == numchildren(node)
-        @debug "[global] declaration with no children!" node
-        return nothing
+    id = find_first_of_kind(K"Identifier", node)
+    if isnothing(id)
+        @debug "No identifier found in a declaration" node
     end
-    id = children(node)[1]
-    if kind(id) == K"const" id = children(id)[1] end
-    SymbolTable.declare!(SymbolTable.global_scope(), id)
+    # Don't bother if already declared before, to prevent multiple reports
+    if ! SymbolTable.is_global(id)
+        SymbolTable.declare!(SymbolTable.global_scope(), id)
+        Checks.AvoidGlobalVariables.check(id)
+        if is_constant(node)
+            Checks.DocumentConstants.check(node)
+        end
+    end
 end
 
 
