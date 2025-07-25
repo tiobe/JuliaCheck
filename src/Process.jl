@@ -4,7 +4,7 @@ import JuliaSyntax: SyntaxNode, SourceFile, ParseError, @K_str, is_leaf,
                     is_whitespace, kind, numchildren, JuliaSyntax as JS
 
 using ..Properties
-using ..LosslessTrees: LosslessNode, build_enhanced_tree
+using ..LosslessTrees: LosslessNode, build_enhanced_tree, print_tree
 import ..Checks
 include("SymbolTable.jl"); import .SymbolTable
 
@@ -25,6 +25,7 @@ function check(file_name::String;
         end
         if print_llt
             show(stdout, MIME"text/plain"(), ast.raw, string(JS.sourcetext(SF)))
+            # print_tree(build_enhanced_tree(ast.raw, SF))
         end
 
         SymbolTable.enter_main_module!()
@@ -51,11 +52,15 @@ end
 
 
 function process(node::SyntaxNode)
+    if is_eval_call(node) || kind(node) == K"quote"
+        # There are corners we don't want to inspect.
+        return nothing
+    end
+
     if is_module(node)
         SymbolTable.enter_module!(node)
         Checks.SingleModuleFile.check(node)
         Checks.ModuleNameCasing.check(node)
-        # TODO disabled until we have our own "green" trees: Checks.ModuleEndComment.check(node)
         Checks.ModuleExportLocation.check(node)
         Checks.ModuleImportLocation.check(node)
         Checks.ModuleIncludeLocation.check(node)
@@ -82,17 +87,10 @@ function process(node::SyntaxNode)
 
     if is_array_indx(node) Checks.UseEachindexToIterateIndices.check(node) end
 
-    if is_eval_call(node) || kind(node) == K"quote"
-        # There are corners we don't want to inspect.
-        return nothing
-    end
-
-    if haschildren(node)
-        try for x in children(node) process(x) end
-        catch xspt
-            @error "Unexpected error while processing expression at $(JS.source_location(node)):" xspt
-            return nothing  # stop processing this node, but continue with the rest of the tree
-        end
+    try for x in children(node) process(x) end
+    catch xspt
+        @error "Unexpected error while processing expression at $(JS.source_location(node)):" xspt
+        # Stop processing this branch, but continue with the rest of the tree
     end
 
     # "Post-processing", before returning from this level of the tree
@@ -186,7 +184,6 @@ function process_assignment(node::SyntaxNode)
     Checks.DoNotSetVariablesToInf.check(node)
     Checks.DoNotSetVariablesToNan.check(node)
     SymbolTable.declare!(first(lhs))
-    # Checks.AvoidGlobals.check(node)
 end
 process_assignment(_::LosslessNode) = nothing
 
@@ -258,15 +255,22 @@ function process_with_trivia(node::LosslessNode)
         if is_whitespace(node)
             Checks.UseSpacesInsteadOfTabs.check(node)
             Checks.IndentationLevelsAreFourSpaces.check(node)
-            # Checks.OmitTrailingWhiteSpace.check(node)
+            Checks.OmitTrailingWhiteSpace.check(node)
+
+        elseif kind(node) == K"end"
+            Checks.ModuleEndComment.check(node)
 
         elseif kind(node) == K"String"
-            # Checks.OmitTrailingWhiteSpace.check(node)
+            Checks.OmitTrailingWhiteSpace.check(node)
 
         elseif is_separator(node)
             # Checks.SingleSpaceAfterCommasAndSemicolons.check(node, parent)
         end
     else
+        if is_eval_call(node) || kind(node) == K"quote"
+            # There are corners we don't want to inspect.
+            return nothing
+        end
         if     is_toplevel(node) reset_counters()
         elseif is_operator(node) process_operator(node)
         end

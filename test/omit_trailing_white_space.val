@@ -1,0 +1,32 @@
+
+>> Processing file 'omit_trailing_white_space.jl'...
+
+omit_trailing_white_space.jl(2, 5):
+    # This is a comment  
+#                        └ ── Omit spaces at the end of a line.
+Omit trailing whitespace.
+Rule: omit-trailing-white-space. Severity: 7
+
+omit_trailing_white_space.jl(3, 5):
+    # in multiple lines. 
+#                        └ ── Omit spaces at the end of a line.
+Omit trailing whitespace.
+Rule: omit-trailing-white-space. Severity: 7
+
+omit_trailing_white_space.jl(6, 40):
+    const MAG_THRESHOLD::Float64 = 3e-6  
+#                                        └ ── Omit spaces at the end of a line.
+Omit trailing whitespace.
+Rule: omit-trailing-white-space. Severity: 7
+
+omit_trailing_white_space.jl(9, 5):
+    The Answer to the Ultimate Question of Life, the Universe, 
+#                                                              └ ── Omit spaces at the end of a line.
+Omit trailing whitespace.
+Rule: omit-trailing-white-space. Severity: 7
+
+omit_trailing_white_space.jl(12, 26):
+    const THE_ANSWER = 42	
+#                        	└ ── Omit spaces at the end of a line.
+Omit trailing whitespace.
+Rule: omit-trailing-white-space. Severity: 7

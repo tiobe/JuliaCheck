@@ -1,6 +1,6 @@
 module LosslessTrees
 
-using JuliaSyntax: GreenNode, SourceFile, JuliaSyntax
+using JuliaSyntax: GreenNode, SourceFile, JuliaSyntax, is_leaf
 
 export LosslessNode,
     build_enhanced_node, build_enhanced_tree, children,
@@ -239,6 +239,7 @@ JuliaSyntax.kind(node::LosslessNode) = JuliaSyntax.kind(node.green_node)
 start_index(node::LosslessNode) = node.span.start_offset
 Base.length(node::LosslessNode) = length(node.text)
 
+JuliaSyntax.span(node::LosslessNode) = node.span.end_offset
 
 """
 Find all nodes of a specific kind in the tree.

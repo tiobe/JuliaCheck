@@ -124,9 +124,22 @@ is_stop_point(node::AnyTree)::Bool =
     kind(node) ∈ KSet"function module do let toplevel macro"
 
 function is_eval_call(node::AnyTree)::Bool
-    return kind(node) == K"macrocall" &&
-            haschildren(node) &&
-            string(children(node)[1]) == "@eval"
+    if kind(node) ∈ KSet"call macrocall" && haschildren(node)
+        txt = string(children(node)[1])
+        if txt == "@eval" || txt == "eval"
+            return true
+        else
+            x = children(node)[1]
+            if kind(x) == K"." && haschildren(x)
+                a = children(x)[1]
+                b = children(x)[2]
+                if kind(a) == kind(b) == K"Identifier"
+                    return string(a) == "Core" && string(b) == "eval"
+                end
+            end
+        end
+    end
+    return false
 end
 
 function is_mod_toplevel(node::AnyTree)::Bool
